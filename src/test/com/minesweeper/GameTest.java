@@ -1,7 +1,6 @@
 package test.com.minesweeper;
 
 import com.minesweeper.Game;
-import com.minesweeper.Position;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
