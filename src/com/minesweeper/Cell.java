@@ -1,11 +1,19 @@
 package com.minesweeper;
 
+/**
+ * Represents a single cell on the Minesweeper grid.
+ */
 public class Cell {
 
     private boolean isMine;
     private boolean isRevealed;
     private int adjacentMines;
 
+    /**
+     * Constructs a Cell with a specified mine status.
+     *
+     * @param isMine  true if the cell contains a mine, false otherwise
+     */
     public Cell(boolean isMine) {
         this.isMine = isMine;
         this.isRevealed = false;

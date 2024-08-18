@@ -2,11 +2,22 @@ package com.minesweeper;
 
 import java.util.Random;
 
+/**
+ * The Grid class represents the game board for Minesweeper.
+ * It handles the setup of the grid, placement of mines, calculation of adjacent mine counts,
+ * and uncovering of cells.
+ */
 public class Grid {
     private Cell[][] cells;
     private int gridSize;
     private int mineCount;
 
+    /**
+     * Initializes the grid with the specified size and number of mines.
+     *
+     * @param gridSize   the size of the grid (e.g., 4 for a 4x4 grid)
+     * @param mineCount  the number of mines to place on the grid
+     */
     public void initialize(int gridSize, int mineCount) {
         this.gridSize = gridSize;
         this.mineCount = mineCount;
@@ -50,6 +61,13 @@ public class Grid {
         }
     }
 
+    /**
+     * Counts the number of mines adjacent to the specified cell.
+     *
+     * @param row  the row index of the cell
+     * @param col  the column index of the cell
+     * @return     the number of adjacent mines
+     */
     private int countAdjacentMines(int row, int col) {
         int count = 0;
         for (int i = row - 1; i <= row + 1; i++) {
@@ -62,10 +80,23 @@ public class Grid {
         return count;
     }
 
+    /**
+     * Retrieves the cell at the specified position on the grid.
+     *
+     * @param position  the position of the cell
+     * @return          the Cell object at the specified position
+     */
     public Cell getCell(Position position) {
         return cells[position.getRow()][position.getColumn()];
     }
 
+    /**
+     * Uncovers the cell at the specified position and returns the number of adjacent mines.
+     * If the cell has no adjacent mines, it recursively uncovers adjacent cells.
+     *
+     * @param position  the position of the cell to uncover
+     * @return          the number of adjacent mines
+     */
     public int uncoverCell(Position position) {
         Cell cell = getCell(position);
 
@@ -85,6 +116,11 @@ public class Grid {
         return adjacentMines;
     }
 
+    /**
+     * Recursively uncovers adjacent cells if they have no adjacent mines.
+     *
+     * @param position  the position of the cell to start uncovering from
+     */
     private void uncoverAdjacentCells(Position position) {
         for (Position adjacentPosition : position.getAdjacentPositions(gridSize)) {
             Cell adjacentCell = getCell(adjacentPosition);
@@ -98,7 +134,11 @@ public class Grid {
         }
     }
 
-
+    /**
+     * Checks whether the game has been won by uncovering all non-mine cells.
+     *
+     * @return  true if all non-mine cells are uncovered, false otherwise
+     */
     public boolean isGameWon() {
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {

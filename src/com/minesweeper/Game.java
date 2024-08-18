@@ -2,20 +2,16 @@ package com.minesweeper;
 
 import java.util.Scanner;
 
+/**
+ * The Game class handles the overall flow of the Minesweeper game.
+ * It manages the grid, processes user input, and controls the game loop.
+ */
 public class Game {
     private Grid grid;
     private int gridSize;
     private int mineCount;
     private boolean isGameOver;
     private boolean isFirstDisplay = true;  // Flag to track first display
-
-    public void setupGame(int gridSize, int mineCount) {
-        this.gridSize = gridSize;
-        this.mineCount = mineCount;
-        grid = new Grid();
-        grid.initialize(gridSize, mineCount);
-        isGameOver = false;
-    }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
