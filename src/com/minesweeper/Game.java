@@ -1,5 +1,6 @@
 package com.minesweeper;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -18,9 +19,9 @@ public class Game {
 
         System.out.println("\nWelcome to Minesweeper!");
 
-        // Get grid size from user
-        System.out.print("Enter the size of the grid (e.g. 4 for a 4x4 grid): ");
-        gridSize = scanner.nextInt();
+        // Get grid size from user with validation
+        gridSize = getValidIntegerInput(scanner, "Enter the size of the grid (e.g. 4 for a 4x4 grid): ");
+
 
         // Calculate the maximum number of mines allowed
         int totalSquares = gridSize * gridSize;
@@ -28,8 +29,7 @@ public class Game {
 
         // Get the number of mines from user with validation
         do {
-            System.out.print("Enter the number of mines to place on the grid (maximum is 35% of the total squares): ");
-            mineCount = scanner.nextInt();
+            mineCount = getValidIntegerInput(scanner, "Enter the number of mines to place on the grid (maximum is 35% of the total squares): ");
 
             if(mineCount > maxMines) {
                 System.out.println("Invalid input. The number of mines cannot exceed " + maxMines + ". Please try again.");
@@ -71,6 +71,24 @@ public class Game {
 
         System.out.println("Press any key to exit...");
         scanner.nextLine(); // Wait for the user to press a key
+    }
+
+    private int getValidIntegerInput(Scanner scanner, String prompt) {
+        int value = -1;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            try {
+                value = scanner.nextInt();
+                valid = true; // Break the loop if the input is valid
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.next(); // Clear the invalid input from the scanner
+            }
+        }
+
+        return value;
     }
 
     private void displayGameWon() {
