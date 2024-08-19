@@ -52,7 +52,17 @@ public class Game {
 
     // Prompt the user for the grid size
     private int promptForGridSize(Scanner scanner) {
-        return getValidIntegerInput(scanner, "Enter the size of the grid (e.g. 4 for a 4x4 grid): ");
+        int gridSize;
+        var maxGridSize = 10;
+
+        do {
+            gridSize = getValidIntegerInput(scanner, "Enter the size of the grid (e.g. 4 for a 4x4 grid): ");
+            if (gridSize > maxGridSize) {
+                System.out.println("Invalid input. The grid size cannot exceed 10. Please try again.");
+            }
+        } while (gridSize > maxGridSize);
+
+        return gridSize;
     }
 
     // Prompt the user for the number of mines
