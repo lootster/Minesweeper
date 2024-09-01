@@ -98,7 +98,7 @@ public class Game {
                 checkForWinCondition();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid input. Please try again.");
+            System.out.println("Warning: " + e.getMessage() + "\nPlease try again.");
         }
     }
 
